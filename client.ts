@@ -2,33 +2,35 @@
 interface Iweapon {
   use(): void;
 }
-// class cliente que depende da interface weapon
-class Client {
+// class Heroi que depende da interface weapon
+class Heroi {
   attack(weapon: Iweapon) {
     weapon.use();
   }
 }
-// class que o cliente quer usar no attack
+// class que o Heroi quer usar no attack
 class Sword {
   slash() {
     console.log("Sword slash");
   }
 }
-// class que o cliente quer usar no attack
+// class que o Heroi quer usar no attack
 class MachineGun {
   fire() {
     console.log("Machine Gun fire");
   }
 }
 
-// -- usar weapon sem adapter causa uma incopatibilidade de interfaces, porque o cliente espera uma interface weapon e recebe class com um metodo de attack sword
-const clientNew = new Client();
-clientNew.attack(new Sword());
+// -- usar weapon sem adapter causa uma incopatibilidade de interfaces, porque o Heroi espera uma interface weapon e recebe class com um metodo de attack sword
+const HeroiNew = new Heroi();
+HeroiNew.attack(new Sword());
 
-//Uso do ADAPTER para ultilizar corretamente o metodo attack da class weapon
+//Uso do ADAPTER para ultilizar corretamente o metodo attack da class sword
 
 class SwordAdapter extends Sword implements Iweapon {
   use() {
     this.slash();
   }
 }
+
+HeroiNew.attack(new SwordAdapter());
